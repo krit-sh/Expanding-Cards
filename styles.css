@@ -2,6 +2,13 @@
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -9,49 +16,54 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
     background: #1a1a1a;
+    line-height: 1.6;
 }
 
 .container {
     display: flex;
-    width: 100vw;
-    padding: 0 20px;
-    gap: 15px;
+    width: 100%;
+    padding: 1rem;
+    gap: 0.75rem;
+    max-width: 2000px;
+    margin: 0 auto;
 }
 
 .panel {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 80vh;
-    border-radius: 30px;
+    height: 70vh;
+    border-radius: 1.5rem;
     cursor: pointer;
     flex: 0.5;
     position: relative;
     transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    overflow: hidden;
 }
 
 .panel h3 {
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 2vw, 2rem);
     font-weight: 700;
     position: absolute;
-    bottom: 30px;
-    left: 30px;
-    margin: 0;
-    opacity: 0;
+    bottom: 1.5rem;
+    left: 1.5rem;
     color: white;
     text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+    opacity: 0;
     transform: translateY(30px);
     transition: all 0.4s ease-out;
+    padding: 0.5rem 1rem;
+    background: rgba(0,0,0,0.4);
+    border-radius: 0.5rem;
 }
 
 .panel.active {
     flex: 5;
-    border-radius: 20px;
+    border-radius: 1rem;
 }
 
 .panel.active h3 {
@@ -60,33 +72,98 @@ body {
     transition-delay: 0.3s;
 }
 
-@media (max-width: 768px) {
+/* Tablet Layout */
+@media (max-width: 1024px) {
     .container {
-        flex-direction: column;
-        height: 100vh;
-        padding: 20px;
+        flex-wrap: wrap;
+        padding: 1rem;
     }
-
+    
     .panel {
-        width: 100%;
-        height: 20vh;
-        border-radius: 15px;
+        flex: 1 1 45%;
+        height: 40vh;
+        margin: 0.5rem;
     }
-
+    
     .panel.active {
+        flex: 1 1 100%;
         height: 60vh;
-    }
-
-    .panel h3 {
-        font-size: 1.2rem;
-        bottom: 20px;
-        left: 20px;
     }
 }
 
+/* Mobile Landscape */
+@media (max-width: 768px) and (orientation: landscape) {
+    .panel {
+        height: 80vh;
+    }
+    
+    .panel.active {
+        height: 90vh;
+    }
+}
+
+/* Mobile Layout */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+    
+    .panel {
+        width: 100%;
+        height: 25vh;
+        flex: 1;
+        border-radius: 0.75rem;
+        margin: 0.25rem 0;
+    }
+    
+    .panel.active {
+        height: 60vh;
+        flex: 5;
+    }
+    
+    .panel h3 {
+        font-size: 1.1rem;
+        bottom: 1rem;
+        left: 1rem;
+        padding: 0.25rem 0.75rem;
+    }
+}
+
+/* Small Mobile Optimization */
 @media (max-width: 480px) {
     .panel:nth-of-type(4),
     .panel:nth-of-type(5) {
         display: none;
+    }
+    
+    .panel {
+        height: 30vh;
+    }
+    
+    .panel.active {
+        height: 50vh;
+    }
+}
+
+/* Foldable Devices */
+@media (max-width: 320px) {
+    .panel h3 {
+        font-size: 1rem;
+        bottom: 0.5rem;
+        left: 0.5rem;
+    }
+}
+
+/* Desktop Large Screens */
+@media (min-width: 2000px) {
+    .container {
+        gap: 1.5rem;
+        padding: 2rem;
+    }
+    
+    .panel {
+        border-radius: 2rem;
     }
 }

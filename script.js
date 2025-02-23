@@ -1,14 +1,16 @@
 const panels = document.querySelectorAll('.panel');
 
-panels.forEach((panel) => {
-    panel.addEventListener('click', () => {
-        removeActiveClasses()
-        panel.classList.add('active')
-    })
-})
+// Add touch support
+panels.forEach(panel => {
+    panel.addEventListener('click', activatePanel);
+    panel.addEventListener('touchstart', activatePanel);
+});
 
-function removeActiveClasses(){
-    panels.forEach(panel => {
-        panel.classList.remove('active')
-    })
+function activatePanel() {
+    removeActiveClasses();
+    this.classList.add('active');
+}
+
+function removeActiveClasses() {
+    panels.forEach(panel => panel.classList.remove('active'));
 }
